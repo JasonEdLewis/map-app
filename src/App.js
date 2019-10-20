@@ -1,32 +1,35 @@
-import React, { useState } from 'react';
-import ReactMapGL from 'react-map-gl';
+ import React, { Component } from 'react';
+import Map  from './Map'
 
 
 
-export default function App() {
-  const token = "pk.eyJ1IjoiamFzZWdhdGVzIiwiYSI6ImNrMXlmNHRyOTBqbDAzY216bGczOGsxOGsifQ.PoQ-5U96aY_pSlXHv2oEKA"
-  const [viewport, setViewport] = useState({
-    latitude: 41.1507,
-    longitude: -73.7542,
-    width: '100vw',
-    height: '100vh',
-    zoom: 10,
-  });
 
+
+
+export default class App extends Component{
+    
+  state={
+    schools:[]
+  }
+
+
+  fetchSchools = () =>{
+    return fetch('https://data.cityofnewyork.us/resource/wg9x-4ke6.json')
+    .then(resp=>resp.json())
+    .then(data => this.setState({ schools: data}))
+  
+  }
+  componentDidMount=()=>{
+    return this.fetchSchools()
+  }
+  render(){
+    // const schools = this.state.schools.map(school => <div school={school} key={school.system_code}></div>)
   return (
     <div>
-      <h1>Lets map it!</h1>
-      <ReactMapGL
-        {...viewport}
-        mapboxApiAccessToken={token}
-        mapStyle="mapbox://styles/jasegates/ck1yhrx0fauin1cqmee77wdzk"
-        onViewportChange={viewport => {
-          setViewport(viewport)
-        }}
-      >
-        <h1 style={{ color: "red", textAlign: "center" }}>Markers here</h1>
-      </ReactMapGL>
+      <Map schools={this.state.schools}/>
     </div>
   );
+}
+
 }
 

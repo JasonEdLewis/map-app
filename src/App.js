@@ -24,8 +24,8 @@ export default function App() {
           setViewport(viewport)
         }}
       >
-        Markers here
-    </ReactMapGL>
+        <h1 style={{ color: "red", textAlign: "center" }}>Markers here</h1>
+      </ReactMapGL>
     </div>
   );
 }

@@ -15,13 +15,15 @@ export default function Map(props) {
     zoom: 10,
   });
 
-  const [selectedSchool, setSelectedSchool] = useState(null)
+  // const [selectedSchool, setSelectedSchool] = useState(null)
+  const [selectedMovie, setSelectedMovie] = useState(null)
   console.log(props)
-  const { schools } = props
-
+  const {eventtype, movies } = props
+const theMovies = movies.map(mov=> <p>{mov.eventagency}:{}</p>)
   return (
     <div>
-      <h1 style={{ textAlign: "center", backgroundColor: "#8da9f6" }}>NYC SCHOOLS</h1>
+      <h1>{theMovies}</h1>
+      {/* <h1 style={{ textAlign: "center", backgroundColor: "#8da9f6" }}>NYC SCHOOLS</h1>
       <ReactMapGL
         {...viewport}
         mapboxApiAccessToken={token}
@@ -57,7 +59,7 @@ export default function Map(props) {
             <p><strong>Location:</strong> {selectedSchool.primary_address_line_1}</p>
           </Popup>
         ) : null}
-      </ReactMapGL>
+      </ReactMapGL> */}
     </div>
   );
 }
